@@ -1,0 +1,980 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F0F1A">
+
+    ```
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- TAB WIDGET con fondo oscuro -->
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1A1A2E"
+            android:divider="@null"
+            android:showDividers="none"/>
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- ═══════════════════════════════════════════
+                 TAB 1 · MONEDA  💱  (base: USD)
+            ════════════════════════════════════════════ -->
+            <ScrollView
+                android:id="@+id/tab1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#0F0F1A">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- Header -->
+                    <TextView
+                        android:text="💱  CONVERSOR DE MONEDA"
+                        android:textColor="#FFD700"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginBottom="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="Base: Dólares Americanos (USD)"
+                        android:textColor="#AAAACC"
+                        android:textSize="13sp"
+                        android:gravity="center"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <!-- Conversor 1: EUR -->
+                    <androidx.cardview.widget.CardView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp"
+                        app:cardBackgroundColor="#1E1E3A"
+                        app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView android:text="🇪🇺  USD → Euro (EUR)"
+                                android:textColor="#FFD700" android:textStyle="bold"
+                                android:textSize="15sp" android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etMoneda1"
+                                android:hint="Ingresa dólares..." android:inputType="numberDecimal"
+                                android:textColor="#FFFFFF" android:textColorHint="#666688"
+                                android:backgroundTint="#3A3A5C"
+                                android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnMoneda1"
+                                android:text="Convertir"
+                                android:backgroundTint="#FFD700"
+                                android:textColor="#0F0F1A" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvMoneda1"
+                                android:text="Resultado: —"
+                                android:textColor="#00E5CC" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Conversor 2: GBP -->
+                    <androidx.cardview.widget.CardView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1E1E3A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🇬🇧  USD → Libra esterlina (GBP)"
+                                android:textColor="#FFD700" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etMoneda2" android:hint="Ingresa dólares..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#666688" android:backgroundTint="#3A3A5C" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnMoneda2" android:text="Convertir"
+                                android:backgroundTint="#FFD700" android:textColor="#0F0F1A" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvMoneda2" android:text="Resultado: —"
+                                android:textColor="#00E5CC" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Conversor 3: JPY -->
+                    <androidx.cardview.widget.CardView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1E1E3A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🇯🇵  USD → Yen japonés (JPY)"
+                                android:textColor="#FFD700" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etMoneda3" android:hint="Ingresa dólares..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#666688" android:backgroundTint="#3A3A5C" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnMoneda3" android:text="Convertir"
+                                android:backgroundTint="#FFD700" android:textColor="#0F0F1A" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvMoneda3" android:text="Resultado: —"
+                                android:textColor="#00E5CC" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Conversor 4: MXN -->
+                    <androidx.cardview.widget.CardView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1E1E3A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🇲🇽  USD → Peso mexicano (MXN)"
+                                android:textColor="#FFD700" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etMoneda4" android:hint="Ingresa dólares..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#666688" android:backgroundTint="#3A3A5C" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnMoneda4" android:text="Convertir"
+                                android:backgroundTint="#FFD700" android:textColor="#0F0F1A" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvMoneda4" android:text="Resultado: —"
+                                android:textColor="#00E5CC" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Conversor 5: BRL -->
+                    <androidx.cardview.widget.CardView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1E1E3A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🇧🇷  USD → Real brasileño (BRL)"
+                                android:textColor="#FFD700" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etMoneda5" android:hint="Ingresa dólares..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#666688" android:backgroundTint="#3A3A5C" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnMoneda5" android:text="Convertir"
+                                android:backgroundTint="#FFD700" android:textColor="#0F0F1A" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvMoneda5" android:text="Resultado: —"
+                                android:textColor="#00E5CC" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- ═══════════════════════════════════════════
+                 TAB 2 · MASA  ⚖️  (base: kg)
+            ════════════════════════════════════════════ -->
+            <ScrollView
+                android:id="@+id/tab2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#0F1A0F">
+                <LinearLayout android:orientation="vertical" android:padding="20dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+                    <TextView android:text="⚖️  CONVERSOR DE MASA"
+                        android:textColor="#69FF47" android:textSize="20sp" android:textStyle="bold"
+                        android:gravity="center" android:layout_marginBottom="6dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="Base: Kilogramos (kg)"
+                        android:textColor="#AACCAA" android:textSize="13sp" android:gravity="center"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                    <!-- kg → lb -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1A2E1A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🏋️  kg → Libras (lb)"
+                                android:textColor="#69FF47" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etMasa1" android:hint="Ingresa kilogramos..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#668866" android:backgroundTint="#2A4A2A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnMasa1" android:text="Convertir"
+                                android:backgroundTint="#69FF47" android:textColor="#0F1A0F" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvMasa1" android:text="Resultado: —"
+                                android:textColor="#FFE066" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- kg → g -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1A2E1A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🧪  kg → Gramos (g)"
+                                android:textColor="#69FF47" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etMasa2" android:hint="Ingresa kilogramos..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#668866" android:backgroundTint="#2A4A2A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnMasa2" android:text="Convertir"
+                                android:backgroundTint="#69FF47" android:textColor="#0F1A0F" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvMasa2" android:text="Resultado: —"
+                                android:textColor="#FFE066" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- kg → oz -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1A2E1A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🫙  kg → Onzas (oz)"
+                                android:textColor="#69FF47" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etMasa3" android:hint="Ingresa kilogramos..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#668866" android:backgroundTint="#2A4A2A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnMasa3" android:text="Convertir"
+                                android:backgroundTint="#69FF47" android:textColor="#0F1A0F" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvMasa3" android:text="Resultado: —"
+                                android:textColor="#FFE066" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- kg → t -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1A2E1A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🚛  kg → Toneladas (t)"
+                                android:textColor="#69FF47" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etMasa4" android:hint="Ingresa kilogramos..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#668866" android:backgroundTint="#2A4A2A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnMasa4" android:text="Convertir"
+                                android:backgroundTint="#69FF47" android:textColor="#0F1A0F" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvMasa4" android:text="Resultado: —"
+                                android:textColor="#FFE066" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- kg → mg -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1A2E1A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="💊  kg → Miligramos (mg)"
+                                android:textColor="#69FF47" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etMasa5" android:hint="Ingresa kilogramos..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#668866" android:backgroundTint="#2A4A2A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnMasa5" android:text="Convertir"
+                                android:backgroundTint="#69FF47" android:textColor="#0F1A0F" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvMasa5" android:text="Resultado: —"
+                                android:textColor="#FFE066" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- ═══════════════════════════════════════════
+                 TAB 3 · TIEMPO  ⏱️  (base: horas)
+            ════════════════════════════════════════════ -->
+            <ScrollView
+                android:id="@+id/tab3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#1A0F1A">
+                <LinearLayout android:orientation="vertical" android:padding="20dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+                    <TextView android:text="⏱️  CONVERSOR DE TIEMPO"
+                        android:textColor="#E040FB" android:textSize="20sp" android:textStyle="bold"
+                        android:gravity="center" android:layout_marginBottom="6dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="Base: Horas (h)"
+                        android:textColor="#BBAACC" android:textSize="13sp" android:gravity="center"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                    <!-- h → min -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#2A1A2E" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="⏲️  Horas → Minutos"
+                                android:textColor="#E040FB" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etTiempo1" android:hint="Ingresa horas..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#886699" android:backgroundTint="#3D2A4A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnTiempo1" android:text="Convertir"
+                                android:backgroundTint="#E040FB" android:textColor="#1A0F1A" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvTiempo1" android:text="Resultado: —"
+                                android:textColor="#80FFEA" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- h → seg -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#2A1A2E" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="⚡  Horas → Segundos"
+                                android:textColor="#E040FB" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etTiempo2" android:hint="Ingresa horas..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#886699" android:backgroundTint="#3D2A4A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnTiempo2" android:text="Convertir"
+                                android:backgroundTint="#E040FB" android:textColor="#1A0F1A" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvTiempo2" android:text="Resultado: —"
+                                android:textColor="#80FFEA" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- h → días -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#2A1A2E" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🌅  Horas → Días"
+                                android:textColor="#E040FB" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etTiempo3" android:hint="Ingresa horas..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#886699" android:backgroundTint="#3D2A4A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnTiempo3" android:text="Convertir"
+                                android:backgroundTint="#E040FB" android:textColor="#1A0F1A" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvTiempo3" android:text="Resultado: —"
+                                android:textColor="#80FFEA" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- h → semanas -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#2A1A2E" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="📅  Horas → Semanas"
+                                android:textColor="#E040FB" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etTiempo4" android:hint="Ingresa horas..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#886699" android:backgroundTint="#3D2A4A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnTiempo4" android:text="Convertir"
+                                android:backgroundTint="#E040FB" android:textColor="#1A0F1A" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvTiempo4" android:text="Resultado: —"
+                                android:textColor="#80FFEA" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- h → meses -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#2A1A2E" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🗓️  Horas → Meses"
+                                android:textColor="#E040FB" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etTiempo5" android:hint="Ingresa horas..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#886699" android:backgroundTint="#3D2A4A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnTiempo5" android:text="Convertir"
+                                android:backgroundTint="#E040FB" android:textColor="#1A0F1A" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvTiempo5" android:text="Resultado: —"
+                                android:textColor="#80FFEA" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- ═══════════════════════════════════════════
+                 TAB 4 · VOLUMEN  🧴  (base: litros)
+            ════════════════════════════════════════════ -->
+            <ScrollView
+                android:id="@+id/tab4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#0F1520">
+                <LinearLayout android:orientation="vertical" android:padding="20dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+                    <TextView android:text="🧴  CONVERSOR DE VOLUMEN"
+                        android:textColor="#29B6F6" android:textSize="20sp" android:textStyle="bold"
+                        android:gravity="center" android:layout_marginBottom="6dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="Base: Litros (L)"
+                        android:textColor="#AABBCC" android:textSize="13sp" android:gravity="center"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                    <!-- L → mL -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#152030" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="💧  Litros → Mililitros (mL)"
+                                android:textColor="#29B6F6" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etVolumen1" android:hint="Ingresa litros..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#557799" android:backgroundTint="#1E3A55" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnVolumen1" android:text="Convertir"
+                                android:backgroundTint="#29B6F6" android:textColor="#0F1520" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvVolumen1" android:text="Resultado: —"
+                                android:textColor="#FFD740" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- L → gal -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#152030" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🪣  Litros → Galones (gal)"
+                                android:textColor="#29B6F6" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etVolumen2" android:hint="Ingresa litros..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#557799" android:backgroundTint="#1E3A55" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnVolumen2" android:text="Convertir"
+                                android:backgroundTint="#29B6F6" android:textColor="#0F1520" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvVolumen2" android:text="Resultado: —"
+                                android:textColor="#FFD740" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- L → qt -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#152030" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🥛  Litros → Cuartos (qt)"
+                                android:textColor="#29B6F6" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etVolumen3" android:hint="Ingresa litros..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#557799" android:backgroundTint="#1E3A55" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnVolumen3" android:text="Convertir"
+                                android:backgroundTint="#29B6F6" android:textColor="#0F1520" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvVolumen3" android:text="Resultado: —"
+                                android:textColor="#FFD740" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- L → fl oz -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#152030" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🥤  Litros → Fl. Onzas (fl oz)"
+                                android:textColor="#29B6F6" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etVolumen4" android:hint="Ingresa litros..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#557799" android:backgroundTint="#1E3A55" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnVolumen4" android:text="Convertir"
+                                android:backgroundTint="#29B6F6" android:textColor="#0F1520" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvVolumen4" android:text="Resultado: —"
+                                android:textColor="#FFD740" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- L → m³ -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#152030" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="📦  Litros → Metros cúbicos (m³)"
+                                android:textColor="#29B6F6" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etVolumen5" android:hint="Ingresa litros..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#557799" android:backgroundTint="#1E3A55" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnVolumen5" android:text="Convertir"
+                                android:backgroundTint="#29B6F6" android:textColor="#0F1520" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvVolumen5" android:text="Resultado: —"
+                                android:textColor="#FFD740" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- ═══════════════════════════════════════════
+                 TAB 5 · LONGITUD  📏  (base: metros)
+            ════════════════════════════════════════════ -->
+            <ScrollView
+                android:id="@+id/tab5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#1A1200">
+                <LinearLayout android:orientation="vertical" android:padding="20dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+                    <TextView android:text="📏  CONVERSOR DE LONGITUD"
+                        android:textColor="#FFAB00" android:textSize="20sp" android:textStyle="bold"
+                        android:gravity="center" android:layout_marginBottom="6dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="Base: Metros (m)"
+                        android:textColor="#CCBBAA" android:textSize="13sp" android:gravity="center"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                    <!-- m → cm -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#2A2000" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="📐  Metros → Centímetros (cm)"
+                                android:textColor="#FFAB00" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etLongitud1" android:hint="Ingresa metros..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#887755" android:backgroundTint="#3A2E00" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnLongitud1" android:text="Convertir"
+                                android:backgroundTint="#FFAB00" android:textColor="#1A1200" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvLongitud1" android:text="Resultado: —"
+                                android:textColor="#69FF47" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- m → mm -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#2A2000" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🔩  Metros → Milímetros (mm)"
+                                android:textColor="#FFAB00" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etLongitud2" android:hint="Ingresa metros..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#887755" android:backgroundTint="#3A2E00" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnLongitud2" android:text="Convertir"
+                                android:backgroundTint="#FFAB00" android:textColor="#1A1200" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvLongitud2" android:text="Resultado: —"
+                                android:textColor="#69FF47" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- m → ft -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#2A2000" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🦶  Metros → Pies (ft)"
+                                android:textColor="#FFAB00" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etLongitud3" android:hint="Ingresa metros..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#887755" android:backgroundTint="#3A2E00" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnLongitud3" android:text="Convertir"
+                                android:backgroundTint="#FFAB00" android:textColor="#1A1200" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvLongitud3" android:text="Resultado: —"
+                                android:textColor="#69FF47" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- m → in -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#2A2000" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="📌  Metros → Pulgadas (in)"
+                                android:textColor="#FFAB00" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etLongitud4" android:hint="Ingresa metros..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#887755" android:backgroundTint="#3A2E00" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnLongitud4" android:text="Convertir"
+                                android:backgroundTint="#FFAB00" android:textColor="#1A1200" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvLongitud4" android:text="Resultado: —"
+                                android:textColor="#69FF47" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- m → km -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#2A2000" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🗺️  Metros → Kilómetros (km)"
+                                android:textColor="#FFAB00" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etLongitud5" android:hint="Ingresa metros..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#887755" android:backgroundTint="#3A2E00" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnLongitud5" android:text="Convertir"
+                                android:backgroundTint="#FFAB00" android:textColor="#1A1200" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvLongitud5" android:text="Resultado: —"
+                                android:textColor="#69FF47" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- ═══════════════════════════════════════════
+                 TAB 6 · ALMACENAMIENTO  💾  (base: GB)
+            ════════════════════════════════════════════ -->
+            <ScrollView
+                android:id="@+id/tab6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#0D0D0D">
+                <LinearLayout android:orientation="vertical" android:padding="20dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+                    <TextView android:text="💾  CONVERSOR DE ALMACENAMIENTO"
+                        android:textColor="#00E5FF" android:textSize="20sp" android:textStyle="bold"
+                        android:gravity="center" android:layout_marginBottom="6dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                    <TextView android:text="Base: Gigabytes (GB)"
+                        android:textColor="#AAAAAA" android:textSize="13sp" android:gravity="center"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                    <!-- GB → MB -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1A1A1A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="📀  GB → Megabytes (MB)"
+                                android:textColor="#00E5FF" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etAlmacen1" android:hint="Ingresa gigabytes..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#555555" android:backgroundTint="#2A2A2A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnAlmacen1" android:text="Convertir"
+                                android:backgroundTint="#00E5FF" android:textColor="#0D0D0D" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvAlmacen1" android:text="Resultado: —"
+                                android:textColor="#FF6EC7" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- GB → KB -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1A1A1A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🖥️  GB → Kilobytes (KB)"
+                                android:textColor="#00E5FF" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etAlmacen2" android:hint="Ingresa gigabytes..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#555555" android:backgroundTint="#2A2A2A" android:padding="10dp"
+
+                            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnAlmacen2" android:text="Convertir"
+                                android:backgroundTint="#00E5FF" android:textColor="#0D0D0D" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvAlmacen2" android:text="Resultado: —"
+                                android:textColor="#FF6EC7" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- GB → Bytes -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1A1A1A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="⚙️  GB → Bytes"
+                                android:textColor="#00E5FF" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etAlmacen3" android:hint="Ingresa gigabytes..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#555555" android:backgroundTint="#2A2A2A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnAlmacen3" android:text="Convertir"
+                                android:backgroundTint="#00E5FF" android:textColor="#0D0D0D" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvAlmacen3" android:text="Resultado: —"
+                                android:textColor="#FF6EC7" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- GB → TB -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1A1A1A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🗄️  GB → Terabytes (TB)"
+                                android:textColor="#00E5FF" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etAlmacen4" android:hint="Ingresa gigabytes..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#555555" android:backgroundTint="#2A2A2A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnAlmacen4" android:text="Convertir"
+                                android:backgroundTint="#00E5FF" android:textColor="#0D0D0D" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvAlmacen4" android:text="Resultado: —"
+                                android:textColor="#FF6EC7" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- GB → bits -->
+                    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:cardCornerRadius="16dp" app:cardBackgroundColor="#1A1A1A" app:cardElevation="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:padding="16dp"
+                            android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="🔢  GB → Bits"
+                                android:textColor="#00E5FF" android:textStyle="bold" android:textSize="15sp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <EditText android:id="@+id/etAlmacen5" android:hint="Ingresa gigabytes..."
+                                android:inputType="numberDecimal" android:textColor="#FFFFFF"
+                                android:textColorHint="#555555" android:backgroundTint="#2A2A2A" android:padding="10dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <Button android:id="@+id/btnAlmacen5" android:text="Convertir"
+                                android:backgroundTint="#00E5FF" android:textColor="#0D0D0D" android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tvAlmacen5" android:text="Resultado: —"
+                                android:textColor="#FF6EC7" android:textSize="16sp" android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
+    </LinearLayout>
+</TabHost>
