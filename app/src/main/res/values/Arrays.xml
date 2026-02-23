@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="opciones">
+        <item>Suma</item>
+        <item>Resta</item>
+        <item>Multiplicacion</item>
+        <item>Division</item>
+        <item>Factorial</item>
+        <item>Porcentaje</item>
+        <item>Exponenciacion</item>
+        <item>Raiz</item>
+    </string-array>
+</resources>

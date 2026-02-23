@@ -13,13 +13,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-/*
-Tarea para viernes 06/02/2026 individual.
-Factorial
-Porcentaje
-Exponenciacion
-Raiz
-* */
 public class MainActivity extends AppCompatActivity {
     TextView tempVal;
     Button btn;
@@ -54,6 +47,22 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 3: //division
                 respuesta = num1 / num2;
+                break;
+            case 4: //Factorial (usa solo num1)
+                long fact = 1;
+                for (int i = 1; i <= num1.intValue(); i++) {
+                    fact *= i;
+                }
+                respuesta = fact;
+                break;
+            case 5: //Porcentaje (num1 % de num2)
+                respuesta = (num1 / 100) * num2;
+                break;
+            case 6: //Exponenciacion (num1 ^ num2)
+                respuesta = Math.pow(num1, num2);
+                break;
+            case 7: //Raiz (raiz num2 de num1)
+                respuesta = Math.pow(num1, 1.0 / num2);
                 break;
         }
         tempVal = findViewById(R.id.lblRespuesta);
