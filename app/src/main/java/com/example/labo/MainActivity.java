@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+
 public class MainActivity extends AppCompatActivity {
     TextView tempVal;
     Button btn;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         double respuesta = 0;
 
         spn = findViewById(R.id.cboOpciones);
-        switch (spn.getSelectedItemPosition()){
+        switch (spn.getSelectedItemPosition()) {
             case 0: //suma
                 respuesta = num1 + num2;
                 break;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 respuesta = Math.pow(num1, 1.0 / num2);
                 break;
         }
+
         tempVal = findViewById(R.id.lblRespuesta);
         tempVal.setText("Respuesta: "+ respuesta);
     }
