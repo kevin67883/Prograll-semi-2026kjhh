@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="opciones">
-        <item>Suma</item>
-        <item>Resta</item>
-        <item>Multiplicacion</item>
-        <item>Division</item>
-        <item>Factorial</item>
-        <item>Porcentaje</item>
-        <item>Exponenciacion</item>
-        <item>Raiz</item>
+
+    <string-array name="monedas">
+        <item>Dólar (USD)</item>
+        <item>Euro (EUR)</item>
+        <item>Quetzal (GTQ)</item>
+        <item>Peso MX (MXN)</item>
+        <item>Real (BRL)</item>
+        <item>Libra (GBP)</item>
     </string-array>
+
+    <string-array name="longitud">
+        <item>Metro (m)</item>
+        <item>Kilómetro (km)</item>
+        <item>Centímetro (cm)</item>
+        <item>Pulgada (in)</item>
+        <item>Pie (ft)</item>
+        <item>Yarda (yd)</item>
+        <item>Milla (mi)</item>
+    </string-array>
+
+    <string-array name="volumen">
+        <item>Litro (L)</item>
+        <item>Mililitro (mL)</item>
+        <item>Galón (gal)</item>
+        <item>Onza líquida (fl oz)</item>
+    </string-array>
+
+    <string-array name="masa">
+        <item>Kilogramo (kg)</item>
+        <item>Gramo (g)</item>
+        <item>Libra (lb)</item>
+        <item>Onza (oz)</item>
+    </string-array>
+
 </resources>
