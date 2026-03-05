@@ -20,18 +20,7 @@
         <item>Milla (mi)</item>
     </string-array>
 
-    <string-array name="volumen">
-        <item>Litro (L)</item>
-        <item>Mililitro (mL)</item>
-        <item>Galón (gal)</item>
-        <item>Onza líquida (fl oz)</item>
-    </string-array>
 
-    <string-array name="masa">
-        <item>Kilogramo (kg)</item>
-        <item>Gramo (g)</item>
-        <item>Libra (lb)</item>
-        <item>Onza (oz)</item>
-    </string-array>
+
 
 </resources>
