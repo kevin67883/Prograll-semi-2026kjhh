@@ -1,70 +1,333 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<TabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tabHost"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/lblTipo"
-        android:text="TIPO:"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <Spinner
-        android:entries="@array/tipo"
-        android:id="@+id/spnTipo"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="60dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/lblDe"
-        android:text="DE:"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <Spinner
-        android:id="@+id/spnDe"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="60dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/lblA"
-        android:text="A:"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <Spinner
-        android:id="@+id/spnA"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/txtCantidad"
-        android:layout_marginTop="140dp"
-        android:hint="Cantidad a convertir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/lblRespuesta"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="20dp"
-        android:text="Respuesta: ?"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btnConvertir"
-        android:layout_marginTop="240dp"
-        android:text="CONVERTIR"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <!-- Barra de pestañas -->
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Contenido de cada pestaña -->
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- PESTAÑA 1: CALCULADORA DE AGUA         -->
+            <!-- ══════════════════════════════════════ -->
+            <ScrollView
+                android:id="@+id/tabAgua"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:background="#F0FAF4">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Título -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="💧 Cálculo de Agua Potable"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A3A2A"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ingresa los metros consumidos para conocer tu factura"
+                        android:textSize="13sp"
+                        android:textColor="#5DAA78"
+                        android:layout_marginBottom="20dp" />
+
+                    <!-- Tabla de tarifas -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TABLA DE TARIFAS"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="#2D6B47"
+                        android:letterSpacing="0.1"
+                        android:layout_marginBottom="6dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="#1A3A2A"
+                        android:padding="1dp"
+                        android:layout_marginBottom="20dp">
+
+                        <!-- Encabezado tabla -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#1A3A2A"
+                            android:padding="8dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="CONSUMO"
+                                android:textColor="#C8F0D8" android:textSize="11sp" android:textStyle="bold" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="TARIFA"
+                                android:textColor="#C8F0D8" android:textSize="11sp" android:textStyle="bold" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="2" android:text="DESCRIPCIÓN"
+                                android:textColor="#C8F0D8" android:textSize="11sp" android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <!-- Fila 1 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#E0F5EA"
+                            android:padding="8dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="1 – 18 mts"
+                                android:textColor="#1A3A2A" android:textSize="12sp" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="$6.00"
+                                android:textColor="#1A3A2A" android:textSize="12sp" android:textStyle="bold" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="2" android:text="Cuota fija"
+                                android:textColor="#2D6B47" android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Fila 2 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#F0FAF4"
+                            android:padding="8dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="19 – 28 mts"
+                                android:textColor="#1A3A2A" android:textSize="12sp" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="$0.45/mt"
+                                android:textColor="#1A3A2A" android:textSize="12sp" android:textStyle="bold" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="2" android:text="Exceso sobre 18"
+                                android:textColor="#2D6B47" android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Fila 3 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#E0F5EA"
+                            android:padding="8dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="29+ mts"
+                                android:textColor="#1A3A2A" android:textSize="12sp" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="$0.65/mt"
+                                android:textColor="#1A3A2A" android:textSize="12sp" android:textStyle="bold" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="2" android:text="Exceso sobre 28"
+                                android:textColor="#2D6B47" android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Campo de entrada -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Metros consumidos"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#2D6B47"
+                        android:layout_marginBottom="6dp" />
+
+                    <EditText
+                        android:id="@+id/etMetros"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ej. 25"
+                        android:inputType="numberDecimal"
+                        android:padding="14dp"
+                        android:background="@drawable/input_bg"
+                        android:textColor="#1A3A2A"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Botón calcular -->
+                    <Button
+                        android:id="@+id/btnCalcularAgua"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CALCULAR"
+                        android:textColor="#C8F0D8"
+                        android:backgroundTint="#1A3A2A"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.15"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Resultado -->
+                    <TextView
+                        android:id="@+id/tvResultadoAgua"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#C8F0D8"
+                        android:textSize="14sp"
+                        android:padding="16dp"
+                        android:background="#1A3A2A"
+                        android:fontFamily="monospace"
+                        android:lineSpacingMultiplier="1.5"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- PESTAÑA 2: CONVERSOR DE ÁREA           -->
+            <!-- ══════════════════════════════════════ -->
+            <ScrollView
+                android:id="@+id/tabArea"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:background="#F0FAF4">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Título -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="📐 Conversor de Área"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A3A2A"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Convierte entre unidades de superficie"
+                        android:textSize="13sp"
+                        android:textColor="#5DAA78"
+                        android:layout_marginBottom="20dp" />
+
+                    <!-- Valor a convertir -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Valor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#2D6B47"
+                        android:layout_marginBottom="6dp" />
+
+                    <EditText
+                        android:id="@+id/etValorArea"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ej. 1000"
+                        android:inputType="numberDecimal"
+                        android:padding="14dp"
+                        android:background="@drawable/input_bg"
+                        android:textColor="#1A3A2A"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Spinner DE -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="De (unidad origen)"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#2D6B47"
+                        android:layout_marginBottom="6dp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerDe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_bg"
+                        android:padding="4dp"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Flecha de conversión -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="⬇  convertir a"
+                        android:textSize="14sp"
+                        android:textColor="#5DAA78"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Spinner A -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="A (unidad destino)"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#2D6B47"
+                        android:layout_marginBottom="6dp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_bg"
+                        android:padding="4dp"
+                        android:layout_marginBottom="20dp" />
+
+                    <!-- Botón convertir -->
+                    <Button
+                        android:id="@+id/btnConvertir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CONVERTIR"
+                        android:textColor="#C8F0D8"
+                        android:backgroundTint="#1A3A2A"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.15"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Resultado -->
+                    <TextView
+                        android:id="@+id/tvResultadoArea"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#C8F0D8"
+                        android:textSize="14sp"
+                        android:padding="16dp"
+                        android:background="#1A3A2A"
+                        android:fontFamily="monospace"
+                        android:lineSpacingMultiplier="1.5" />
+
+                </LinearLayout>
+            </ScrollView>
+
+        </FrameLayout>
+    </LinearLayout>
+</TabHost>
