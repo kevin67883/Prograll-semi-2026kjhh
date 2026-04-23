@@ -5,8 +5,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -15,11 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 public class EditarActivity extends AppCompatActivity {
 
@@ -34,7 +36,9 @@ public class EditarActivity extends AppCompatActivity {
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                 if (uri != null) {
                     fotoPath = uri.toString();
-                    imgPreview.setImageURI(uri);
+                    Glide.with(this).load(uri)
+                            .transform(new CircleCrop())
+                            .into(imgPreview);
                 }
             });
 
@@ -42,7 +46,9 @@ public class EditarActivity extends AppCompatActivity {
             registerForActivityResult(new ActivityResultContracts.TakePicture(), success -> {
                 if (Boolean.TRUE.equals(success) && fotoUri != null) {
                     fotoPath = fotoUri.toString();
-                    imgPreview.setImageURI(fotoUri);
+                    Glide.with(this).load(fotoUri)
+                            .transform(new CircleCrop())
+                            .into(imgPreview);
                 }
             });
 
@@ -71,7 +77,9 @@ public class EditarActivity extends AppCompatActivity {
         fotoPath = getIntent().getStringExtra("foto");
 
         if (fotoPath != null && !fotoPath.isEmpty()) {
-            imgPreview.setImageURI(Uri.parse(fotoPath));
+            Glide.with(this).load(fotoPath)
+                    .transform(new CircleCrop())
+                    .into(imgPreview);
         }
 
         findViewById(R.id.btnSeleccionarFoto).setOnClickListener(v -> mostrarOpcionesFoto());
@@ -88,7 +96,7 @@ public class EditarActivity extends AppCompatActivity {
             );
             p.setId(productoId);
             dao.actualizar(p);
-            Toast.makeText(this, "Actualizado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Actualizado ✓", Toast.LENGTH_SHORT).show();
             finish();
         });
     }
@@ -96,7 +104,7 @@ public class EditarActivity extends AppCompatActivity {
     private void mostrarOpcionesFoto() {
         new AlertDialog.Builder(this)
                 .setTitle("Seleccionar foto")
-                .setItems(new String[]{"Tomar foto", "Elegir de galeria"}, (dialog, which) -> {
+                .setItems(new String[]{"Tomar foto", "Elegir de galería"}, (dialog, which) -> {
                     if (which == 0) abrirCamara();
                     else pickImage.launch("image/*");
                 })
@@ -123,7 +131,7 @@ public class EditarActivity extends AppCompatActivity {
                     "com.example.labo.fileprovider", fotoFile);
             takePicture.launch(fotoUri);
         } catch (IOException e) {
-            Toast.makeText(this, "Error al abrir camara", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error al abrir cámara", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -135,7 +143,7 @@ public class EditarActivity extends AppCompatActivity {
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             lanzarCamara();
         } else {
-            Toast.makeText(this, "Permiso denegado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show();
         }
     }
 }

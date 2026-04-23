@@ -1,3 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">labo</string>
+    <string name="app_name">Labo</string>
+    <string name="marca_talla">%1$s | Talla: %2$s</string>
+    <string name="precio_format">$%1$.2f</string>
+    <string name="codigo_format">Cód: %1$s</string>
+    <string name="eliminar_titulo">Eliminar</string>
+    <string name="eliminar_mensaje">¿Eliminar %1$s?</string>
+    <string name="si">Sí</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="eliminado">Eliminado</string>
 </resources>
