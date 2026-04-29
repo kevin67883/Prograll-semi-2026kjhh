@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <!-- Foto -->
+        <ImageView
+            android:id="@+id/imgFoto"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_ropa_placeholder" />
+
+        <!-- Info central -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="4dp">
+
+            <TextView
+                android:id="@+id/tvNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#212121" />
+
+            <TextView
+                android:id="@+id/tvCodigo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#757575" />
+
+            <TextView
+                android:id="@+id/tvMarca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#424242" />
+
+            <!-- Precio y Costo en fila -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:id="@+id/tvPrecio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#1976D2"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:id="@+id/tvCosto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="#757575" />
+
+            </LinearLayout>
+
+            <!-- Ganancia y Stock en fila -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tvGanancia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="#388E3C"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:id="@+id/tvStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="#F57C00" />
+
+            </LinearLayout>
+
+            <!-- Indicador sync -->
+            <TextView
+                android:id="@+id/tvSync"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <!-- Botones editar / eliminar -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/btnEditar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Editar" />
+
+            <ImageButton
+                android:id="@+id/btnEliminar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@android:drawable/ic_menu_delete"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Eliminar" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
