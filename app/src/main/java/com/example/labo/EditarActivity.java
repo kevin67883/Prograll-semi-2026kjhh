@@ -24,7 +24,7 @@ import java.util.Locale;
 public class EditarActivity extends AppCompatActivity {
 
     private EditText etCodigo, etNombre, etMarca, etTalla, etPrecio,
-            etCosto, etStock, etDescripcion;   // ← nuevos
+            etCosto, etStock, etDescripcion;
     private ImageView imgPreview;
     private String fotoPath = "";
     private Uri fotoUri;
@@ -72,7 +72,6 @@ public class EditarActivity extends AppCompatActivity {
         etDescripcion = findViewById(R.id.etDescripcion);
         imgPreview    = findViewById(R.id.imgPreview);
 
-        // Cargar datos existentes
         productoId = getIntent().getIntExtra("id", -1);
         couchId    = getIntent().getStringExtra("couchId");
         etCodigo.setText(getIntent().getStringExtra("codigo"));
@@ -105,8 +104,8 @@ public class EditarActivity extends AppCompatActivity {
                     etMarca.getText().toString().trim(),
                     etTalla.getText().toString().trim(),
                     Double.parseDouble(etPrecio.getText().toString().trim()),
-                    costo,   // ← nuevo
-                    stock,   // ← nuevo
+                    costo,
+                    stock,
                     etDescripcion.getText().toString().trim(),
                     fotoPath
             );
@@ -160,7 +159,7 @@ public class EditarActivity extends AppCompatActivity {
             File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
             File fotoFile = File.createTempFile("IMG_" + timeStamp, ".jpg", storageDir);
             fotoUri = FileProvider.getUriForFile(this,
-                    "com.example.tiendaropa2.fileprovider", fotoFile);
+                    "com.example.labo.fileprovider", fotoFile);
             takePicture.launch(fotoUri);
         } catch (IOException e) {
             Toast.makeText(this, "Error al abrir cámara", Toast.LENGTH_SHORT).show();

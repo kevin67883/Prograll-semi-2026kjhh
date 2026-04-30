@@ -24,7 +24,7 @@ import java.util.Locale;
 public class AgregarActivity extends AppCompatActivity {
 
     private EditText etCodigo, etNombre, etMarca, etTalla, etPrecio,
-            etCosto, etStock, etDescripcion;   // ← nuevos
+            etCosto, etStock, etDescripcion;
     private ImageView imgPreview;
     private String fotoPath = "";
     private Uri fotoUri;
@@ -139,7 +139,7 @@ public class AgregarActivity extends AppCompatActivity {
             File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
             File fotoFile = File.createTempFile("IMG_" + timeStamp, ".jpg", storageDir);
             fotoUri = FileProvider.getUriForFile(this,
-                    "com.example.tiendaropa2.fileprovider", fotoFile);
+                    "com.example.labo.fileprovider", fotoFile);
             takePicture.launch(fotoUri);
         } catch (IOException e) {
             Toast.makeText(this, "Error al abrir cámara", Toast.LENGTH_SHORT).show();
