@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "tienda_ropa.db";
-    private static final int DB_VERSION = 3; // ← subimos la versión
+    private static final int DB_VERSION = 5;
 
     public static final String TABLE = "productos";
     public static final String COL_ID = "id";
@@ -30,26 +30,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TABLE + " (" +
-                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL_CODIGO + " TEXT UNIQUE NOT NULL, " +
-                COL_NOMBRE + " TEXT NOT NULL, " +
-                COL_MARCA + " TEXT, " +
-                COL_TALLA + " TEXT, " +
-                COL_PRECIO + " REAL, " +
-                COL_COSTO + " REAL DEFAULT 0, " +
-                COL_STOCK + " INTEGER DEFAULT 0, " +
-                COL_DESCRIPCION + " TEXT, " +
-                COL_FOTO + " TEXT, " +
-                COL_COUCH_ID + " TEXT DEFAULT '', " +
+                COL_ID           + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL_CODIGO       + " TEXT NOT NULL, " +
+                COL_NOMBRE       + " TEXT NOT NULL, " +
+                COL_MARCA        + " TEXT, " +
+                COL_TALLA        + " TEXT, " +
+                COL_PRECIO       + " REAL DEFAULT 0, " +
+                COL_COSTO        + " REAL DEFAULT 0, " +
+                COL_STOCK        + " INTEGER DEFAULT 0, " +
+                COL_DESCRIPCION  + " TEXT, " +
+                COL_FOTO         + " TEXT, " +
+                COL_COUCH_ID     + " TEXT DEFAULT '', " +
                 COL_SINCRONIZADO + " INTEGER DEFAULT 0)";
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 3) {
-            db.execSQL("ALTER TABLE " + TABLE + " ADD COLUMN " + COL_COSTO + " REAL DEFAULT 0");
-            db.execSQL("ALTER TABLE " + TABLE + " ADD COLUMN " + COL_STOCK + " INTEGER DEFAULT 0");
-        }
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+        onCreate(db);
     }
 }

@@ -23,29 +23,29 @@ public class SyncManager {
 
     public SyncManager(Context context) {
         this.dao = new ProductoDAO(context);
-        this.client = new OkHttpClient();
+        this.client = new OkHttpClient.Builder()
+                .connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
+                .readTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
+                .build();
     }
 
     public void verificarConexion(SyncCallback callback) {
         new Thread(() -> {
             try {
-                String url = CouchDBHelper.getUrl();
-                Log.e(TAG, "Conectando a: " + url);
-                Log.e(TAG, "Credenciales: " + CouchDBHelper.getCredenciales());
                 Request request = new Request.Builder()
-                        .url(url)
+                        .url(CouchDBHelper.getUrl())
                         .header("Authorization", "Basic " + CouchDBHelper.getCredenciales())
                         .build();
                 Response response = client.newCall(request).execute();
-                Log.e(TAG, "Código respuesta: " + response.code());
-                Log.e(TAG, "Respuesta: " + response.body().string());
+                ResponseBody body = response.body();
+                if (body != null) body.close();
                 boolean conectado = response.isSuccessful();
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (conectado) callback.onSuccess("Conectado");
                     else callback.onError("Sin conexión");
                 });
             } catch (Exception e) {
-                Log.e(TAG, "Error de conexión: " + e.getMessage());
+                Log.e(TAG, "Error conexión: " + e.getMessage());
                 new Handler(Looper.getMainLooper()).post(() ->
                         callback.onError("Sin conexión"));
             }
@@ -60,23 +60,31 @@ public class SyncManager {
                         .header("Authorization", "Basic " + CouchDBHelper.getCredenciales())
                         .build();
                 Response response = client.newCall(request).execute();
-                String body = response.body().string();
-                JSONObject json = new JSONObject(body);
+                ResponseBody responseBody = response.body();
+                if (responseBody == null) {
+                    new Handler(Looper.getMainLooper()).post(() ->
+                            callback.onError("Respuesta vacía"));
+                    return;
+                }
+                String bodyStr = responseBody.string();
+                JSONObject json = new JSONObject(bodyStr);
                 JSONArray rows = json.getJSONArray("rows");
 
                 for (int i = 0; i < rows.length(); i++) {
-                    JSONObject doc = rows.getJSONObject(i).getJSONObject("doc");
-                    String id = doc.getString("_id");
-                    if (id.startsWith("_design")) continue;
+                    JSONObject row = rows.getJSONObject(i);
+                    if (!row.has("doc")) continue;
+                    JSONObject doc = row.getJSONObject("doc");
+                    String id = doc.optString("_id", "");
+                    if (id.startsWith("_design") || id.isEmpty()) continue;
 
                     Producto p = new Producto();
                     p.setCodigo(doc.optString("codigo", ""));
-                    p.setNombre(doc.optString("nombre", ""));
+                    p.setNombre(doc.optString("nombre", "Sin nombre"));
                     p.setMarca(doc.optString("marca", ""));
                     p.setTalla(doc.optString("talla", ""));
                     p.setPrecio(doc.optDouble("precio", 0));
-                    p.setCosto(doc.optDouble("costo", 0));        // ← nuevo
-                    p.setStock(doc.optInt("stock", 0));            // ← nuevo
+                    p.setCosto(doc.optDouble("costo", 0));
+                    p.setStock(doc.optInt("stock", 0));
                     p.setDescripcion(doc.optString("descripcion", ""));
                     p.setFotoPath(doc.optString("foto_path", ""));
                     p.setCouchId(id);
@@ -89,7 +97,7 @@ public class SyncManager {
                 new Handler(Looper.getMainLooper()).post(() ->
                         callback.onSuccess("Productos descargados"));
             } catch (Exception e) {
-                Log.e(TAG, "Error: " + e.getMessage());
+                Log.e(TAG, "Error descarga: " + e.getMessage());
                 new Handler(Looper.getMainLooper()).post(() ->
                         callback.onError("Error: " + e.getMessage()));
             }
@@ -100,17 +108,17 @@ public class SyncManager {
         new Thread(() -> {
             try {
                 JSONObject json = new JSONObject();
-                json.put("codigo", p.getCodigo());
-                json.put("nombre", p.getNombre());
-                json.put("marca", p.getMarca());
-                json.put("talla", p.getTalla());
-                json.put("precio", p.getPrecio());
-                json.put("costo", p.getCosto());                   // ← nuevo
-                json.put("ganancia", p.getGanancia());             // ← nuevo (calculada)
-                json.put("stock", p.getStock());                   // ← nuevo
+                json.put("codigo",      p.getCodigo());
+                json.put("nombre",      p.getNombre());
+                json.put("marca",       p.getMarca());
+                json.put("talla",       p.getTalla());
+                json.put("precio",      p.getPrecio());
+                json.put("costo",       p.getCosto());
+                json.put("ganancia",    p.getGanancia());
+                json.put("stock",       p.getStock());
                 json.put("descripcion", p.getDescripcion());
-                json.put("presentacion", "Unidad");
-                json.put("foto_path", p.getFotoPath() != null ? p.getFotoPath() : "");
+                json.put("presentacion","Unidad");
+                json.put("foto_path",   p.getFotoPath() != null ? p.getFotoPath() : "");
 
                 RequestBody body = RequestBody.create(json.toString(), JSON_TYPE);
                 Request request = new Request.Builder()
@@ -120,13 +128,21 @@ public class SyncManager {
                         .build();
 
                 Response response = client.newCall(request).execute();
-                JSONObject respJson = new JSONObject(response.body().string());
+                ResponseBody responseBody = response.body();
+                if (responseBody == null) {
+                    new Handler(Looper.getMainLooper()).post(() ->
+                            callback.onError("Respuesta vacía"));
+                    return;
+                }
+                JSONObject respJson = new JSONObject(responseBody.string());
                 String couchId = respJson.optString("id", "");
-                dao.actualizarCouchId(p.getId(), couchId);
-
+                if (!couchId.isEmpty()) {
+                    dao.actualizarCouchId(p.getId(), couchId);
+                }
                 new Handler(Looper.getMainLooper()).post(() ->
                         callback.onSuccess("Subido correctamente"));
             } catch (Exception e) {
+                Log.e(TAG, "Error subida: " + e.getMessage());
                 new Handler(Looper.getMainLooper()).post(() ->
                         callback.onError("Error: " + e.getMessage()));
             }
@@ -141,23 +157,34 @@ public class SyncManager {
                         .header("Authorization", "Basic " + CouchDBHelper.getCredenciales())
                         .build();
                 Response getResponse = client.newCall(getRequest).execute();
-                JSONObject docActual = new JSONObject(getResponse.body().string());
-                String rev = docActual.getString("_rev");
+                ResponseBody getBody = getResponse.body();
+                if (getBody == null) {
+                    new Handler(Looper.getMainLooper()).post(() ->
+                            callback.onError("No se pudo obtener el documento"));
+                    return;
+                }
+                JSONObject docActual = new JSONObject(getBody.string());
+                String rev = docActual.optString("_rev", "");
+                if (rev.isEmpty()) {
+                    new Handler(Looper.getMainLooper()).post(() ->
+                            callback.onError("Revisión no encontrada"));
+                    return;
+                }
 
                 JSONObject json = new JSONObject();
-                json.put("_id", p.getCouchId());
-                json.put("_rev", rev);
-                json.put("codigo", p.getCodigo());
-                json.put("nombre", p.getNombre());
-                json.put("marca", p.getMarca());
-                json.put("talla", p.getTalla());
-                json.put("precio", p.getPrecio());
-                json.put("costo", p.getCosto());                   // ← nuevo
-                json.put("ganancia", p.getGanancia());             // ← nuevo (calculada)
-                json.put("stock", p.getStock());                   // ← nuevo
+                json.put("_id",         p.getCouchId());
+                json.put("_rev",        rev);
+                json.put("codigo",      p.getCodigo());
+                json.put("nombre",      p.getNombre());
+                json.put("marca",       p.getMarca());
+                json.put("talla",       p.getTalla());
+                json.put("precio",      p.getPrecio());
+                json.put("costo",       p.getCosto());
+                json.put("ganancia",    p.getGanancia());
+                json.put("stock",       p.getStock());
                 json.put("descripcion", p.getDescripcion());
-                json.put("presentacion", "Unidad");
-                json.put("foto_path", p.getFotoPath() != null ? p.getFotoPath() : "");
+                json.put("presentacion","Unidad");
+                json.put("foto_path",   p.getFotoPath() != null ? p.getFotoPath() : "");
 
                 RequestBody body = RequestBody.create(json.toString(), JSON_TYPE);
                 Request request = new Request.Builder()
@@ -165,11 +192,14 @@ public class SyncManager {
                         .header("Authorization", "Basic " + CouchDBHelper.getCredenciales())
                         .put(body)
                         .build();
-                client.newCall(request).execute();
+                Response response = client.newCall(request).execute();
+                ResponseBody respBody = response.body();
+                if (respBody != null) respBody.close();
 
                 new Handler(Looper.getMainLooper()).post(() ->
                         callback.onSuccess("Actualizado en servidor"));
             } catch (Exception e) {
+                Log.e(TAG, "Error actualizar: " + e.getMessage());
                 new Handler(Looper.getMainLooper()).post(() ->
                         callback.onError("Error: " + e.getMessage()));
             }
@@ -184,19 +214,28 @@ public class SyncManager {
                         .header("Authorization", "Basic " + CouchDBHelper.getCredenciales())
                         .build();
                 Response getResponse = client.newCall(getRequest).execute();
-                JSONObject docActual = new JSONObject(getResponse.body().string());
-                String rev = docActual.getString("_rev");
+                ResponseBody getBody = getResponse.body();
+                if (getBody == null) {
+                    new Handler(Looper.getMainLooper()).post(() ->
+                            callback.onError("No se pudo obtener el documento"));
+                    return;
+                }
+                JSONObject docActual = new JSONObject(getBody.string());
+                String rev = docActual.optString("_rev", "");
 
                 Request request = new Request.Builder()
                         .url(CouchDBHelper.getUrl() + "/" + p.getCouchId() + "?rev=" + rev)
                         .header("Authorization", "Basic " + CouchDBHelper.getCredenciales())
                         .delete()
                         .build();
-                client.newCall(request).execute();
+                Response response = client.newCall(request).execute();
+                ResponseBody respBody = response.body();
+                if (respBody != null) respBody.close();
 
                 new Handler(Looper.getMainLooper()).post(() ->
                         callback.onSuccess("Eliminado del servidor"));
             } catch (Exception e) {
+                Log.e(TAG, "Error eliminar: " + e.getMessage());
                 new Handler(Looper.getMainLooper()).post(() ->
                         callback.onError("Error: " + e.getMessage()));
             }

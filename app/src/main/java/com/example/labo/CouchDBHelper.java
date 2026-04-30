@@ -1,14 +1,17 @@
 package com.example.labo;
 
 public class CouchDBHelper {
-
-    private static final String BASE_URL = "http://192.168.1.5:5984";
-    private static final String DATABASE = "david";
-    private static final String USUARIO = "kevin2026";
-    private static final String PASSWORD = "KevinCampos";
+    private static final String BASE_URL = "http://192.168.1.7:5984";
+    private static final String DATABASE = "kevin";
+    private static final String USUARIO = "KevinCampos";
+    private static final String PASSWORD = "kevin2026";
 
     public static String getUrl() {
         return BASE_URL + "/" + DATABASE;
+    }
+
+    public static String getVista() {
+        return getUrl() + "/_design/osiel/_view/osiel";
     }
 
     public static String getCredenciales() {
