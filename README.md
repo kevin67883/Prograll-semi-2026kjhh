@@ -1,6 +1,39 @@
 *Codigos de Ejemplo de la clase de Programacion Computacional II*
 
 
+<h3 align="center">🌱 Aprendiendo programación y creando proyectos</h3>
+
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?color=00F7FF&center=true&vCenter=true&lines=Aprendiendo+JavaScript;Usando+VS+Code;Explorando+Android+Studio;Practicando+cada+día+🚀" />
+</p>
+
+---
+
+### 💻 Programas que uso
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=vscode,androidstudio,github,git,html,css,js" />
+</p>
+
+---
+
+
+
+---
+
+### 🔥 Racha de actividad
+
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=TUUSUARIO&theme=tokyonight" />
+</p>
+
+---
+
+### ✨ Sobre mí
+
+- 🌎 Soy de El Salvador
+- 💻 Me gusta aprender programación
+- 🚀 Poco a poco mejorando cada día
 
 <a target="_blank" align="center">
   <img align="right" top="500" height="300" width="400" alt="GIF" src="https://media.giphy.com/media/SWoSkN6DxTszqIKEqv/giphy.gif">
