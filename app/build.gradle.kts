@@ -37,6 +37,7 @@ android {
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.messaging)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)

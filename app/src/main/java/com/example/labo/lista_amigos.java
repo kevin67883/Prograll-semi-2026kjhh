@@ -1,34 +1,35 @@
 package com.example.labo;
 
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+    import android.app.Activity;
+    import android.content.Intent;
+    import android.os.Bundle;
+    import android.text.Editable;
+    import android.text.TextWatcher;
+    import android.widget.ListView;
+    import android.widget.TextView;
+    import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
+    import androidx.activity.EdgeToEdge;
+    import androidx.annotation.NonNull;
+    import androidx.appcompat.app.AppCompatActivity;
+    import androidx.core.graphics.Insets;
+    import androidx.core.view.ViewCompat;
+    import androidx.core.view.WindowInsetsCompat;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+    import com.google.android.material.floatingactionbutton.FloatingActionButton;
+    import com.google.firebase.database.DataSnapshot;
+    import com.google.firebase.database.DatabaseError;
+    import com.google.firebase.database.DatabaseReference;
+    import com.google.firebase.database.FirebaseDatabase;
+    import com.google.firebase.database.ValueEventListener;
+    import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.util.ArrayList;
+    import org.json.JSONArray;
+    import org.json.JSONObject;
+
+    import java.util.ArrayList;
 
 public class lista_amigos extends Activity {
     Bundle parametros = new Bundle();
@@ -53,7 +54,25 @@ public class lista_amigos extends Activity {
 
         listarDatos();
         buscarAmigos();
+        mostrarChats();
+    }
+    private void mostrarChats(){
+        ltsAmigos.setOnItemClickListener( (parent, view, position, id)->{
+            try{
+                Bundle parametros = new Bundle();
+                parametros.putString("nombre", jsonArray.getJSONObject(position).getString("nombre"));
+                parametros.putString("to", jsonArray.getJSONObject(position).getString("to"));
+                parametros.putString("from", jsonArray.getJSONObject(position).getString("from"));
+                parametros.putString("urlFoto", jsonArray.getJSONObject(position).getString("urlFoto"));
+                parametros.putString("urlCompletaFotoFirestore", jsonArray.getJSONObject(position).getString("urlCompletaFotoFirestore"));
 
+                Intent intent = new Intent(getApplicationContext(), chats.class);
+                intent.putExtras(parametros);
+                startActivity(intent);
+            }catch (Exception e){
+                mostrarMsg("Error al abrir el chat: " + e.getMessage());
+            }
+        });
     }
     private void listarDatos(){
         try{

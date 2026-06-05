@@ -1,4 +1,5 @@
 package com.example.labo;
+
 import android.Manifest;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -27,4 +28,5 @@ public class detectarinternet {
         }
         return false;
     }
+
 }
